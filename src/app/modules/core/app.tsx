@@ -1,5 +1,6 @@
 import * as React from 'react';
 import logo from '@assets/logo.svg';
+import { H1 } from '@app/components/atm.typography';
 
 export class App extends React.Component {
   public render() {
@@ -7,7 +8,7 @@ export class App extends React.Component {
       <div>
         <header>
           <img src={logo}/>
-          <h1>Welcome</h1>
+          <H1>Welcome</H1>
         </header>
         <p>
           To get started, edit <code>src/App.tsx</code> and save to reload.
