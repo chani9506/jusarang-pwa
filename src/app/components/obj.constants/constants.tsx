@@ -1,22 +1,32 @@
 enum BrandColor {
-  Purple = '#663399',
-  Orange = 'orange',
+  Red = '#B71C1C',
 }
 
 enum GrayScale {
   Black = '#212121',
-  White = '#FFFFFF',
+  White = '#FAFAFA',
+  GrayXLight = '#E0E0E0',
+  GrayLight = '#BDBDBD',
+  Gray = '#757575',
+  GrayDark = '#616161',
+  GrayXDark = '#424242',
 }
 
 export class Color {
-  public static readonly Primary = BrandColor.Purple;
-  public static readonly Secondary = BrandColor.Orange;
+  public static readonly Primary = GrayScale.White;
+  public static readonly Secondary = BrandColor.Red;
   public static readonly Black = GrayScale.Black;
   public static readonly White = GrayScale.White;
+  public static readonly GrayXLight = GrayScale.GrayXLight;
+  public static readonly GrayLight = GrayScale.GrayLight;
+  public static readonly Gray = GrayScale.Gray;
+  public static readonly GrayDark = GrayScale.GrayDark;
+  public static readonly GrayXDark = GrayScale.GrayXDark;
+  public static readonly Surface = GrayScale.Black;
 }
 
 export enum FontFamily {
-  Primary = "'Open Sans', arial, sans-serif",
+  Primary = 'Roboto, sans-serif',
 }
 
 export enum FontWeight {
@@ -27,11 +37,11 @@ export enum FontWeight {
 }
 
 export enum FontSize {
-  XSmall = '10px',
-  Small = '12px',
-  Medium = '14px',
-  Large = '20px',
-  XLarge = '50px',
+  XSmall = '14px',
+  Small = '16px',
+  Medium = '20px',
+  Large = '34px',
+  XLarge = '48px',
 }
 
 export enum Spacing {
@@ -40,4 +50,8 @@ export enum Spacing {
   Medium = '16px',
   Large = '24px',
   XLarge = '32px',
+}
+
+export enum IconSize {
+  Medium = '20px',
 }
