@@ -6,13 +6,17 @@ import { injectGlobals } from '@app/components/obj.globals';
 import { Token } from 'typedi';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router';
+import { ThemeProvider } from 'styled-components';
+import { GridConfig } from '@app/components/obj.grid';
 
 export const HistoryToken = new Token<History>();
 
 ReactDOM.render(
-  <Router history={createBrowserHistory()}>
-    <App />
-  </Router>,
+  <ThemeProvider theme={GridConfig}>
+    <Router history={createBrowserHistory()}>
+      <App />
+    </Router>
+  </ThemeProvider>,
   document.getElementById('root') as HTMLElement,
 );
 registerServiceWorker();

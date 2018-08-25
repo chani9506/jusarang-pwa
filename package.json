@@ -7,6 +7,7 @@
     "@types/storybook__addon-knobs": "^3.4.1",
     "color": "^3.0.0",
     "react": "^16.4.2",
+    "react-docgen-typescript-loader": "^2.2.0",
     "react-dom": "^16.4.2",
     "react-fa": "^5.0.0",
     "react-router-dom": "^4.3.1",
@@ -23,7 +24,7 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 9001 -c src/storybook"
   },
   "devDependencies": {
     "@storybook/addon-actions": "4.0.0-alpha.4",
@@ -40,7 +41,6 @@
     "@types/storybook__react": "^3.0.9",
     "awesome-typescript-loader": "^5.2.0",
     "babel-core": "^6.26.3",
-    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "typescript": "^3.0.1",
     "webpack": "^4.16.5"
   }

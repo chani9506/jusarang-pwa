@@ -4,6 +4,7 @@ import { Button } from './button.component';
 import { H2 } from '../atm.typography';
 import { Col, Grid, Row } from '../obj.grid';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import { Separator } from '@app/components/obj.box';
 
 const buttonType = {
   primary: 'primary',
@@ -16,6 +17,7 @@ const buttonType = {
 storiesOf('Atoms', module)
   .add('Buttons', () => (
     <Grid fluid={true} bgColor={true}>
+      <Separator/>
       <H2>Button</H2>
       <Row mb={true}>
         <Col xs={12}>
