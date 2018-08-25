@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import { Background } from '@app/components/obj.constants';
 
 export const injectGlobals = () => {
   return injectGlobal`
@@ -7,6 +8,7 @@ export const injectGlobals = () => {
       }
     body {
       margin: 0;
+      background-color: ${Background.Color};
     }
     a {
       text-decoration: none;

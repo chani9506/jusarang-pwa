@@ -22,7 +22,6 @@ const labelColors = {
 
 const ButtonStyledCss = css`
   position: relative;
-  min-width: 100px;
   min-height: 40px;
   background-color: ${(props: ButtonProps) => props.outlined ?
     'transparent' : buttonColors[props.btnkind]};

@@ -25,6 +25,10 @@ export class Color {
   public static readonly Surface = GrayScale.Black;
 }
 
+export enum Background {
+  Color = GrayScale.Black,
+}
+
 export enum FontFamily {
   Primary = 'Roboto, sans-serif',
 }

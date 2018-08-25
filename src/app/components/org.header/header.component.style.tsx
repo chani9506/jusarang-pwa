@@ -10,6 +10,7 @@ export const HeaderStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${Color.Surface};
+  box-shadow: 0 0.5px 0 0 ${Color.GrayDark};
   width: 100%;
   height: ${headerHeight}px;
   padding: 0 ${Spacing.Medium};

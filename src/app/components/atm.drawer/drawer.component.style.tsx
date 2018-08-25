@@ -33,7 +33,7 @@ export const DrawerOverlayStyled = styled.a`
   height: 100%;
   right: 0;
   top: 0;
-  background-color: ${Color.Black};
+  background-color: ${Color.White};
   opacity: ${(props: DrawerProps) => (props.active) ? '.3' : '0'};
   z-index: ${(props: DrawerProps) => (props.active) ? '1' : '-1'};
   pointer-events: ${(props: DrawerProps) => (props.active) ? '0' : 'none'};
