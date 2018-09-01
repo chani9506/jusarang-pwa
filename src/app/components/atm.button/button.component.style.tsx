@@ -38,6 +38,10 @@ const ButtonStyledCss = css`
   text-transform: uppercase;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+
+  & > .fa {
+    margin-right: ${Spacing.XSmall};
+  }
 `;
 
 export const ButtonStyled = styled.button`

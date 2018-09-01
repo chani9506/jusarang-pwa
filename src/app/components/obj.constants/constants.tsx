@@ -1,4 +1,5 @@
 enum BrandColor {
+  Blue = '#3B72FF',
   Red = '#B71C1C',
 }
 
@@ -13,7 +14,7 @@ enum GrayScale {
 }
 
 export class Color {
-  public static readonly Primary = GrayScale.White;
+  public static readonly Primary = BrandColor.Blue;
   public static readonly Secondary = BrandColor.Red;
   public static readonly Black = GrayScale.Black;
   public static readonly White = GrayScale.White;
@@ -26,7 +27,7 @@ export class Color {
 }
 
 export enum Background {
-  Color = GrayScale.Black,
+  Color = GrayScale.White,
 }
 
 export enum FontFamily {
