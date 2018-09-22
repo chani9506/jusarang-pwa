@@ -11,7 +11,7 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
   margin: 0;
-  color: ${Color.White};
+  color: ${Color.Black};
   font-family: ${FontFamily.Primary};
   font-weight: ${FontWeight.Normal};
   font-size: ${FontSize.Large};
@@ -19,7 +19,7 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   margin: 0;
-  color: ${Color.GrayLight};
+  color: ${Color.Black};
   font-family: ${FontFamily.Primary};
   font-weight: ${FontWeight.Normal};
   font-size: ${FontSize.Medium};

@@ -30,27 +30,28 @@ export const HamburgerMenuHeaderStyled = styled.div`
   margin-bottom: 60px;
 `;
 
-const DismissButtonSize = 16;
+// TODO: Remove unused style
+// const DismissButtonSize = 16;
 
-export const HamburgerMenuDismissButtonStyled = styled.div`
-  position: relative;
-  width: ${DismissButtonSize}px;
-  height: ${DismissButtonSize}px;
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    height: 2px;
-    width: ${DismissButtonSize}px;
-    top: 50%;
-    left: 0;
-    background: ${Color.GrayLight};
-  }
-  &:before {
-    transform: rotate(45deg);
-    margin-top: -1px;
-  }
-  &::after {
-    transform: rotate(-45deg);
-    margin-top: -1px;
-  }
-`;
+// export const HamburgerMenuDismissButtonStyled = styled.div`
+//   position: relative;
+//   width: ${DismissButtonSize}px;
+//   height: ${DismissButtonSize}px;
+//   &:before, &:after {
+//     content: '';
+//     position: absolute;
+//     height: 2px;
+//     width: ${DismissButtonSize}px;
+//     top: 50%;
+//     left: 0;
+//     background: ${Color.GrayLight};
+//   }
+//   &:before {
+//     transform: rotate(45deg);
+//     margin-top: -1px;
+//   }
+//   &::after {
+//     transform: rotate(-45deg);
+//     margin-top: -1px;
+//   }
+// `;

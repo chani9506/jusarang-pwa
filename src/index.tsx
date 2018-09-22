@@ -14,10 +14,11 @@ export const HistoryToken = new Token<History>();
 ReactDOM.render(
   <ThemeProvider theme={GridConfig}>
     <Router history={createBrowserHistory()}>
-      <App />
+      <App/>
     </Router>
   </ThemeProvider>,
   document.getElementById('root') as HTMLElement,
 );
+
 registerServiceWorker();
 injectGlobals();

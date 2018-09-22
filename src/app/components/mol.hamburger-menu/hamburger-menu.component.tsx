@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-  HamburgerMenuDismissButtonStyled,
   HamburgerMenuHeaderStyled,
   HamburgerMenuItemStyled,
   HamburgerMenuLabelStyled,
@@ -33,9 +32,7 @@ export class HamburgerMenu extends React.Component<HamburgerMenuProps, any> {
   render() {
     return (
       <HamburgerMenuStyled>
-        <HamburgerMenuHeaderStyled>
-          <HamburgerMenuDismissButtonStyled onClick={this.props.onClick}/>
-        </HamburgerMenuHeaderStyled>
+        <HamburgerMenuHeaderStyled/>
         {this.props.children}
       </HamburgerMenuStyled>
     );

@@ -10,9 +10,7 @@ export interface HamburgerButtonProps {
 export const HamburgerButton = (props: HamburgerButtonProps) => {
   return (
     <HamburgerButtonStyled onClick={props.onClick}>
-      <HamburgerInnerStyled
-        active={props.active}
-      />
+      <HamburgerInnerStyled active={props.active}/>
     </HamburgerButtonStyled>
   );
 };

@@ -9,7 +9,6 @@ export const HeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${Color.Primary};
   box-shadow: 0 0.5px 0 0 ${Color.White};
   width: 100%;
   height: ${headerHeight}px;

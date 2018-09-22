@@ -1,5 +1,5 @@
 enum BrandColor {
-  Blue = '#3B72FF',
+  Blue = '#2196F3',
   Red = '#B71C1C',
 }
 

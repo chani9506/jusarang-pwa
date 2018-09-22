@@ -3,7 +3,6 @@ import { HeaderPlaceholderStyled, HeaderStyled } from './header.component.style'
 import { HamburgerButton } from '../atm.hamburger-button';
 import { Hbox } from '../obj.box';
 import { H3 } from '../atm.typography';
-import { FaIcon } from '../atm.fa-icon';
 import { Drawer } from '../atm.drawer';
 import { HamburgerMenu } from '../mol.hamburger-menu';
 
@@ -28,26 +27,22 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
       <>
         <HeaderStyled>
           <Hbox grow={true}>
-            <Hbox.Item noGrow={true} hAlign='flex-start' vAlign='center'>
-              <HamburgerButton onClick={this.handleButtonClick} active={this.state.menuOpened}/>
-            </Hbox.Item>
-            <Hbox.Separator/>
             <Hbox.Item hAlign='flex-start' vAlign='center'>
               <H3>Jusarang</H3>
             </Hbox.Item>
             <Hbox.Item hAlign='flex-end' vAlign='center'>
-              <FaIcon.User/>
+              <HamburgerButton onClick={this.handleButtonClick} active={this.state.menuOpened}/>
+              <Drawer active={this.state.menuOpened} onClick={this.handleButtonClick}>
+                <HamburgerMenu onClick={this.handleButtonClick}>
+                  <HamburgerMenu.Item to='/' onClick={this.handleButtonClick}>
+                    Home
+                  </HamburgerMenu.Item>
+                </HamburgerMenu>
+              </Drawer>
             </Hbox.Item>
           </Hbox>
         </HeaderStyled>
         <HeaderPlaceholderStyled/>
-        <Drawer active={this.state.menuOpened} onClick={this.handleButtonClick}>
-          <HamburgerMenu onClick={this.handleButtonClick}>
-            <HamburgerMenu.Item to='/' onClick={this.handleButtonClick}>
-              Home
-            </HamburgerMenu.Item>
-          </HamburgerMenu>
-        </Drawer>
       </>
     );
   }

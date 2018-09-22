@@ -17,7 +17,7 @@ const labelColors = {
   secondary: Color.White,
   callToAction: Color.White,
   alert: Color.Black,
-  link: Color.GrayLight,
+  link: Color.Black,
 };
 
 const ButtonStyledCss = css`

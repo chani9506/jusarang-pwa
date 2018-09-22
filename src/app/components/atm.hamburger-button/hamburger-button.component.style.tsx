@@ -1,54 +1,74 @@
-import { Color } from '../obj.constants';
+import { Color, Spacing } from '../obj.constants';
 import styled from 'styled-components';
 import { HamburgerButtonProps } from './hamburger-button.component';
 
-export const HamburgerButtonStyled = styled.div`
-  cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0.05);
-  display: flex;
-  text-transform: none;
+const hamburgerBarWidth = 25;
+const hamburgerBarHeight = 2;
+const hamburgerBarColor = Color.Black;
+
+export const HamburgerInnerStyled = styled.div`
   position: relative;
-  width: 24px;
-  height: 24px;
-  border: 0;
-  background-color: transparent;
-  margin: 0;
-  z-index: 3;
-  line-height: 0;
-  &:focus {
-    outline: 0;
+  width: ${hamburgerBarWidth}px;
+  height: ${hamburgerBarHeight}px;
+  background: ${hamburgerBarColor};
+  transition: .5s;
+  border-radius: 8px;
+
+  ${(props: HamburgerButtonProps) => props.active ?
+    'background: transparent;'
+    : ''}
+
+  &:before, &:after {
+    display: block;
+    content: '';
+    height: ${hamburgerBarHeight}px;
+    width: ${hamburgerBarWidth}px;
+    position: absolute;
+    background: ${hamburgerBarColor};
+    z-index: -1;
+    transition: .5s .3s;
+    border-radius: 8px;
+
+    ${(props: HamburgerButtonProps) => props.active ?
+      'transition: .5s;'
+      : ''}
+  }
+
+  &:before {
+    top: ${(props: HamburgerButtonProps) => props.active ? '0px' : '7px'};
+    ${(props: HamburgerButtonProps) => props.active ?
+      `
+        transform: rotate(-45deg);
+        background: ${Color.White};
+        width: ${hamburgerBarWidth - 5}px;
+        left: 13%;
+      `
+      : ''}
+  }
+  &:after {
+    top: ${(props: HamburgerButtonProps) => props.active ? '0px' : '-7px'};
+    ${(props: HamburgerButtonProps) => props.active ?
+      `
+        transform: rotate(45deg);
+        background: ${Color.White};
+        width: ${hamburgerBarWidth - 5}px;
+        left: 13%;
+      `
+      : ''}
   }
 `;
 
-export const HamburgerInnerStyled = styled.span`
-  &, &:before, &:after {
-    display: block;
-    position: absolute;
-    height: 2px;
-    background-color: ${Color.GrayLight};
-    border-radius: 4px;
-  }
-  width: 18px;
-  top: 50%;
-  margin-top: -1px;
-  transition-timing-function: ${(props: HamburgerButtonProps) =>
-    props.active ? 'none' : 'cubic-bezier(0.55, 0.055, 0.675, 0.19)'};
-  transition-duration: 0.22s;
-  transition: transform .15s ease;
-  &:before {
-    content: '';
-    width: 24px;
-    top: ${(props: HamburgerButtonProps) => props.active ? '0' : '-6px'};
-    opacity: ${(props: HamburgerButtonProps) => props.active ? '0' : '1'};
-    transition: ${(props: HamburgerButtonProps) => props.active ? 'none'
-      : 'transform .15s ease, top 0.1s 0.25s ease-in, opacity 0.1s ease-in;'};
-  }
-  &:after {
-    content: '';
-    width: 12px;
-    bottom: ${(props: HamburgerButtonProps) => props.active ? '0' : '-6px'};
-    transition: ${(props: HamburgerButtonProps) => props.active ?
-      'none'
-      : 'transform .15s ease, bottom 0.1s 0.25s ease-in'};
+export const HamburgerButtonStyled = styled.div`
+  display: inline-block;
+  position: relative;
+  transition: .3s;
+  padding: ${Spacing.Medium} ${Spacing.XSmall};
+  cursor: pointer;
+  user-select: none;
+  opacity: .8;
+  z-index: 102;
+
+  ${HamburgerInnerStyled}:before, ${HamburgerInnerStyled}:after {
+    transition: .3s;
   }
 `;
