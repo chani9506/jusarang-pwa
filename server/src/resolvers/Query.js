@@ -1,3 +1,5 @@
+const { getUserId } = require('../utils');
+
 async function feed(parent, args, context, info) {
   const where = args.filter ? {
     OR: [
@@ -26,6 +28,12 @@ async function feed(parent, args, context, info) {
   }
 }
 
+async function viewer(parent, args, context, info) {
+  const userId = getUserId(context);
+  return await context.db.query.user({ where: { id: userId }}, info);
+};
+
 module.exports = {
   feed,
+  viewer
 }

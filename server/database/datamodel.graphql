@@ -14,10 +14,18 @@ type User {
   password: String!
   links: [Link!]!
   votes: [Vote!]!
+  groups: [Group!]!
 }
 
 type Vote {
   id: ID! @unique
   link: Link!
   user: User!
+}
+
+type Group {
+  id: ID! @unique
+  users: [User!]!
+  type: String!
+  name: String!
 }
