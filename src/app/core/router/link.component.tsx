@@ -11,7 +11,28 @@ const parseBooleanProps = props => {
   return newProps;
 };
 
+const isRelativeLink = to => {
+  const pathname = typeof to === 'object' ? to.pathname : to;
+  return pathname.startsWith('/');
+};
+
+const parseToProp = to => {
+  const pathname = typeof to === 'object' ? to.pathname : to;
+  if (!isRelativeLink(to) && !pathname.startsWith('http://') && !pathname.startsWith('https://')) {
+    const parsedPathname = 'http://' + pathname;
+    return typeof to === 'object' ? {
+      ...to,
+      pathname: parsedPathname,
+    } : parsedPathname;
+  }
+
+  return to;
+};
+
 export function Link({ to, ...others }: LinkProps) {
   const parsedProps = parseBooleanProps(others);
-  return <RouterLink to={to} {...parsedProps}/>;
+  const parsedTo = parseToProp(to);
+  return isRelativeLink(to) ?
+    <RouterLink to={to} {...parsedProps}/>
+    : <a href={parsedTo} {...parsedProps}/>;
 }

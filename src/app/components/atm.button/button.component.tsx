@@ -6,11 +6,13 @@ export type ButtonType = 'primary' | 'secondary' | 'callToAction' | 'link' | 'al
 export interface ButtonProps {
   onClick?: () => void;
   btnkind: ButtonType;
+  loading?: boolean;
   outlined?: boolean;
   to?: string | object;
 }
 
 export class Button extends React.Component<ButtonProps, any> {
+  // TODO: Implement loading
   static defaultProps = {
     btnkind: 'primary',
     outlined: false,
