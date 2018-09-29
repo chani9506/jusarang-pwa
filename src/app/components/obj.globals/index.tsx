@@ -11,6 +11,7 @@ export const injectGlobals = () => {
       background-color: ${Background.Color};
     }
     a {
+      color: black;
       text-decoration: none;
       -webkit-tap-highlight-color: rgba(0,0,0,0.05);
     }

@@ -67,6 +67,7 @@ export const HamburgerButtonStyled = styled.div`
   user-select: none;
   opacity: .8;
   z-index: 102;
+  cursor: pointer;
 
   ${HamburgerInnerStyled}:before, ${HamburgerInnerStyled}:after {
     transition: .3s;

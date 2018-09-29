@@ -16,6 +16,7 @@ enum GrayScale {
 export class Color {
   public static readonly Primary = BrandColor.Blue;
   public static readonly Secondary = BrandColor.Red;
+
   public static readonly Black = GrayScale.Black;
   public static readonly White = GrayScale.White;
   public static readonly GrayXLight = GrayScale.GrayXLight;
@@ -24,6 +25,8 @@ export class Color {
   public static readonly GrayDark = GrayScale.GrayDark;
   public static readonly GrayXDark = GrayScale.GrayXDark;
   public static readonly Surface = GrayScale.Black;
+
+  public static readonly Alert = BrandColor.Red;
 }
 
 export enum Background {
@@ -59,4 +62,5 @@ export enum Spacing {
 
 export enum IconSize {
   Medium = '20px',
+  XLarge = '40px',
 }

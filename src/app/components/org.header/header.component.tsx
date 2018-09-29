@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { HeaderPlaceholderStyled, HeaderStyled } from './header.component.style';
+import {
+  FixedHeaderStyled, HeaderPlaceholderStyled,
+  HeaderStyled, HeaderTitleWrapperStyled,
+} from './header.component.style';
 import { HamburgerButton } from '../atm.hamburger-button';
-import { Hbox } from '../obj.box';
-import { H3 } from '../atm.typography';
 import { Drawer } from '../atm.drawer';
 import { HamburgerMenu } from '../mol.hamburger-menu';
+import { FaIcon } from '@app/components/atm.fa-icon';
+import { HDisplay } from '@app/components/atm.typography';
 
 // tslint:disable-next-line:no-empty-interface
 export interface HeaderProps {
+  onClick: (menuOpened: boolean) => void;
 }
 
 export interface HeaderState {
@@ -26,28 +30,23 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     return (
       <>
         <HeaderStyled>
-          <Hbox grow={true}>
-            <Hbox.Item hAlign='flex-start' vAlign='center'>
-              <H3>Jusarang</H3>
-            </Hbox.Item>
-            <Hbox.Item hAlign='flex-end' vAlign='center'>
-              <HamburgerButton onClick={this.handleButtonClick} active={this.state.menuOpened}/>
-              <Drawer active={this.state.menuOpened} onClick={this.handleButtonClick}>
-                <HamburgerMenu onClick={this.handleButtonClick}>
-                  <HamburgerMenu.Item to='/' onClick={this.handleButtonClick}>
-                    Home
-                  </HamburgerMenu.Item>
-                </HamburgerMenu>
-              </Drawer>
-            </Hbox.Item>
-          </Hbox>
+          <HeaderTitleWrapperStyled menuOpened={this.state.menuOpened}>
+            <HDisplay>J<FaIcon.Heart/></HDisplay>
+          </HeaderTitleWrapperStyled>
+          <FixedHeaderStyled>
+            <HamburgerButton onClick={this.handleButtonClick} active={this.state.menuOpened}/>
+            <Drawer active={this.state.menuOpened} onClick={this.handleButtonClick}>
+              <HamburgerMenu active={this.state.menuOpened} onClick={this.handleButtonClick}/>
+            </Drawer>
+          </FixedHeaderStyled>
+          <HeaderPlaceholderStyled/>
         </HeaderStyled>
-        <HeaderPlaceholderStyled/>
       </>
     );
   }
 
   private handleButtonClick = () => {
+    this.props.onClick(!this.state.menuOpened);
     this.setState({ menuOpened: !this.state.menuOpened });
   }
 }

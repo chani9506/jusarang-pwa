@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { Color, FontFamily, FontSize, FontWeight } from '../obj.constants';
 
+export const HDisplay = styled.label`
+  color: ${Color.Primary};
+  font-family: ${FontFamily.Primary};
+  font-weight: ${FontWeight.Bold};
+  font-size: 60px;
+`;
+
 export const H1 = styled.h1`
   margin: 0;
   color: ${Color.Black};

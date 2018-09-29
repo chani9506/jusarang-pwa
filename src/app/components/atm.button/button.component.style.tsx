@@ -49,6 +49,7 @@ export const ButtonStyled = styled.button`
   :focus {
     outline: 0;
   }
+
   :active {
     background-color: ${(props: ButtonProps) =>
       props.btnkind === 'link' || props.outlined  ?
