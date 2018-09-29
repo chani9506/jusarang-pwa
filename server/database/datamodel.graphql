@@ -14,7 +14,8 @@ type User {
   password: String!
   links: [Link!]!
   votes: [Vote!]!
-  groups: [Group!]!
+  farm: Group
+  role: String!
 }
 
 type Vote {

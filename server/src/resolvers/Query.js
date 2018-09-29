@@ -28,6 +28,16 @@ async function feed(parent, args, context, info) {
   }
 }
 
+async function farms(parent, args, context, info) {
+  const where = args.filter ? {
+    name_contains: args.filter
+  } : {}
+
+  return await context.db.query.groups({
+    where: { type_contains: 'farm', ...where }, skip: args.skip, first: args.first
+  }, info);
+}
+
 async function viewer(parent, args, context, info) {
   const userId = getUserId(context);
   return await context.db.query.user({ where: { id: userId }}, info);
@@ -35,5 +45,6 @@ async function viewer(parent, args, context, info) {
 
 module.exports = {
   feed,
+  farms,
   viewer
 }

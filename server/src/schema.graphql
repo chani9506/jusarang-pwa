@@ -2,14 +2,16 @@
 
 type Query {
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+  farms(filter: String, skip: Int, first: Int): [Group!]!
   viewer: User!
 }
 
 type Mutation {
   post(url: String!, description: String!): Link!
-  signup(email: String!, password: String!, name: String!): AuthPayload
+  signup(email: String!, password: String!, name: String!, role: String): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote
+  addFarmMembers(userIds: [ID!]!, farmId: ID!): Group
 }
 
 type Subscription {
@@ -33,5 +35,6 @@ type User {
   email: String!
   links: [Link!]!
   votes: [Vote!]!
-  groups: [Group!]!
+  farm: Group
+  role: String!
 }

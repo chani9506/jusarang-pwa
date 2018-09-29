@@ -3,10 +3,20 @@ const jwt = require('jsonwebtoken');
 const { APP_SECRET, getUserId } = require('../utils');
 
 async function signup(parent, args, context, info) {
+  const userExists = await context.db.exists.User({
+    email: args.email,
+  });
+
+  if (userExists) {
+    throw new Error(`User already exists: ${args.email}`)
+  }
+
   const password = await bcrypt.hash(args.password, 10);
 
+  const role = args.role ? args.role : 'member';
+
   const user = await context.db.mutation.createUser({
-    data: { ...args, password },
+    data: { role, ...args, password },
   }, `{ id }`);
 
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
@@ -66,7 +76,32 @@ async function vote(parent, args, context, info) {
   }, info)
 }
 
+async function addFarmMembers(parent, args, context, info) {
+  const farmExists = await context.db.exists.Group({
+    id: args.farmId,
+    type: 'farm'
+  });
+
+  if (!farmExists) {
+    throw new Error(`Invalid Farm Id: ${args.farmId}`)
+  }
+
+  const userIds = await args.userIds.map((userId) => ({
+    id: userId
+  }));
+
+  return context.db.mutation.updateGroup({
+    data: {
+      users: { connect: userIds }
+    },
+    where: {
+      id: args.farmId
+    }
+  }, info)
+}
+
 module.exports = {
+  addFarmMembers,
   signup,
   login,
   post,

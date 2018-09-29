@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/chanyee-kim/database/dev
-# timestamp: Sat Sep 22 2018 22:21:08 GMT-0300 (-03)
+# timestamp: Sat Sep 29 2018 16:17:48 GMT-0300 (-03)
 
 type AggregateGroup {
   count: Int!
@@ -44,12 +44,12 @@ type GroupConnection {
 input GroupCreateInput {
   type: String!
   name: String!
-  users: UserCreateManyWithoutGroupsInput
+  users: UserCreateManyWithoutFarmInput
 }
 
-input GroupCreateManyWithoutUsersInput {
-  create: [GroupCreateWithoutUsersInput!]
-  connect: [GroupWhereUniqueInput!]
+input GroupCreateOneWithoutUsersInput {
+  create: GroupCreateWithoutUsersInput
+  connect: GroupWhereUniqueInput
 }
 
 input GroupCreateWithoutUsersInput {
@@ -127,16 +127,16 @@ input GroupSubscriptionWhereInput {
 input GroupUpdateInput {
   type: String
   name: String
-  users: UserUpdateManyWithoutGroupsInput
+  users: UserUpdateManyWithoutFarmInput
 }
 
-input GroupUpdateManyWithoutUsersInput {
-  create: [GroupCreateWithoutUsersInput!]
-  connect: [GroupWhereUniqueInput!]
-  disconnect: [GroupWhereUniqueInput!]
-  delete: [GroupWhereUniqueInput!]
-  update: [GroupUpdateWithWhereUniqueWithoutUsersInput!]
-  upsert: [GroupUpsertWithWhereUniqueWithoutUsersInput!]
+input GroupUpdateOneWithoutUsersInput {
+  create: GroupCreateWithoutUsersInput
+  connect: GroupWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: GroupUpdateWithoutUsersDataInput
+  upsert: GroupUpsertWithoutUsersInput
 }
 
 input GroupUpdateWithoutUsersDataInput {
@@ -144,13 +144,7 @@ input GroupUpdateWithoutUsersDataInput {
   name: String
 }
 
-input GroupUpdateWithWhereUniqueWithoutUsersInput {
-  where: GroupWhereUniqueInput!
-  data: GroupUpdateWithoutUsersDataInput!
-}
-
-input GroupUpsertWithWhereUniqueWithoutUsersInput {
-  where: GroupWhereUniqueInput!
+input GroupUpsertWithoutUsersInput {
   update: GroupUpdateWithoutUsersDataInput!
   create: GroupCreateWithoutUsersInput!
 }
@@ -298,7 +292,7 @@ type Link implements Node {
   createdAt: DateTime!
   description: String!
   url: String!
-  postedBy(where: UserWhereInput): User
+  postedBy: User
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
 }
 
@@ -716,7 +710,8 @@ type User implements Node {
   password: String!
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
-  groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group!]
+  farm: Group
+  role: String!
 }
 
 """A connection to a list of items."""
@@ -733,13 +728,14 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  role: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
-  groups: GroupCreateManyWithoutUsersInput
+  farm: GroupCreateOneWithoutUsersInput
 }
 
-input UserCreateManyWithoutGroupsInput {
-  create: [UserCreateWithoutGroupsInput!]
+input UserCreateManyWithoutFarmInput {
+  create: [UserCreateWithoutFarmInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -753,10 +749,11 @@ input UserCreateOneWithoutVotesInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutGroupsInput {
+input UserCreateWithoutFarmInput {
   name: String!
   email: String!
   password: String!
+  role: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
 }
@@ -765,16 +762,18 @@ input UserCreateWithoutLinksInput {
   name: String!
   email: String!
   password: String!
+  role: String!
   votes: VoteCreateManyWithoutUserInput
-  groups: GroupCreateManyWithoutUsersInput
+  farm: GroupCreateOneWithoutUsersInput
 }
 
 input UserCreateWithoutVotesInput {
   name: String!
   email: String!
   password: String!
+  role: String!
   links: LinkCreateManyWithoutPostedByInput
-  groups: GroupCreateManyWithoutUsersInput
+  farm: GroupCreateOneWithoutUsersInput
 }
 
 """An edge in a connection."""
@@ -795,6 +794,8 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  role_ASC
+  role_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -806,6 +807,7 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  role: String!
 }
 
 type UserSubscriptionPayload {
@@ -851,18 +853,19 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  role: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
-  groups: GroupUpdateManyWithoutUsersInput
+  farm: GroupUpdateOneWithoutUsersInput
 }
 
-input UserUpdateManyWithoutGroupsInput {
-  create: [UserCreateWithoutGroupsInput!]
+input UserUpdateManyWithoutFarmInput {
+  create: [UserCreateWithoutFarmInput!]
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutGroupsInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutGroupsInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFarmInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFarmInput!]
 }
 
 input UserUpdateOneRequiredWithoutVotesInput {
@@ -881,10 +884,11 @@ input UserUpdateOneWithoutLinksInput {
   upsert: UserUpsertWithoutLinksInput
 }
 
-input UserUpdateWithoutGroupsDataInput {
+input UserUpdateWithoutFarmDataInput {
   name: String
   email: String
   password: String
+  role: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
 }
@@ -893,21 +897,23 @@ input UserUpdateWithoutLinksDataInput {
   name: String
   email: String
   password: String
+  role: String
   votes: VoteUpdateManyWithoutUserInput
-  groups: GroupUpdateManyWithoutUsersInput
+  farm: GroupUpdateOneWithoutUsersInput
 }
 
 input UserUpdateWithoutVotesDataInput {
   name: String
   email: String
   password: String
+  role: String
   links: LinkUpdateManyWithoutPostedByInput
-  groups: GroupUpdateManyWithoutUsersInput
+  farm: GroupUpdateOneWithoutUsersInput
 }
 
-input UserUpdateWithWhereUniqueWithoutGroupsInput {
+input UserUpdateWithWhereUniqueWithoutFarmInput {
   where: UserWhereUniqueInput!
-  data: UserUpdateWithoutGroupsDataInput!
+  data: UserUpdateWithoutFarmDataInput!
 }
 
 input UserUpsertWithoutLinksInput {
@@ -920,10 +926,10 @@ input UserUpsertWithoutVotesInput {
   create: UserCreateWithoutVotesInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutGroupsInput {
+input UserUpsertWithWhereUniqueWithoutFarmInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateWithoutGroupsDataInput!
-  create: UserCreateWithoutGroupsInput!
+  update: UserUpdateWithoutFarmDataInput!
+  create: UserCreateWithoutFarmInput!
 }
 
 input UserWhereInput {
@@ -1095,15 +1101,53 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  role: String
+
+  """All values that are not equal to given value."""
+  role_not: String
+
+  """All values that are contained in given list."""
+  role_in: [String!]
+
+  """All values that are not contained in given list."""
+  role_not_in: [String!]
+
+  """All values less than the given value."""
+  role_lt: String
+
+  """All values less than or equal the given value."""
+  role_lte: String
+
+  """All values greater than the given value."""
+  role_gt: String
+
+  """All values greater than or equal the given value."""
+  role_gte: String
+
+  """All values containing the given string."""
+  role_contains: String
+
+  """All values not containing the given string."""
+  role_not_contains: String
+
+  """All values starting with the given string."""
+  role_starts_with: String
+
+  """All values not starting with the given string."""
+  role_not_starts_with: String
+
+  """All values ending with the given string."""
+  role_ends_with: String
+
+  """All values not ending with the given string."""
+  role_not_ends_with: String
   links_every: LinkWhereInput
   links_some: LinkWhereInput
   links_none: LinkWhereInput
   votes_every: VoteWhereInput
   votes_some: VoteWhereInput
   votes_none: VoteWhereInput
-  groups_every: GroupWhereInput
-  groups_some: GroupWhereInput
-  groups_none: GroupWhereInput
+  farm: GroupWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -1113,8 +1157,8 @@ input UserWhereUniqueInput {
 
 type Vote implements Node {
   id: ID!
-  link(where: LinkWhereInput): Link!
-  user(where: UserWhereInput): User!
+  link: Link!
+  user: User!
 }
 
 """A connection to a list of items."""
